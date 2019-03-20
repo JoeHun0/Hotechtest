@@ -4,6 +4,7 @@ import javafx.scene.input.MouseEvent;
 
 public class Controller {
     public void onMouseClick(MouseEvent mouseEvent) {
-        System.out.println("Message");
+        Input i = new Input();
+        i.InputFromExcell();
     }
 }
