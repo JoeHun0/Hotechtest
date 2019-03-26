@@ -4,6 +4,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,22 +15,22 @@ import java.sql.SQLException;
 
 public class Input {
 
-    public void InputFromExcell() {
+    public void InputFromExcell(File be) {
         try {
-            XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream("input.xlsm"));
-             insertThom(workbook);
-             insertRhom(workbook);
-             insertTuasz1(workbook);
-              insertTuag1(workbook);
-              insertTuasz2(workbook);
-              insertTuag2(workbook);
-              insertHatfok(workbook);
-              insertGozpar(workbook);
-              insertVizpar(workbook);
-              insertTuztadat(workbook);
-              insertVegyes(workbook);
-                insertLogika(workbook);
-
+            XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(be));
+            databaseTorol();
+           //  insertThom(workbook);
+        //     insertRhom(workbook);
+        //     insertTuasz1(workbook);
+        //      insertTuag1(workbook);
+       //      insertTuasz2(workbook);
+       //       insertTuag2(workbook);
+       //       insertHatfok(workbook);
+       //       insertGozpar(workbook);
+      //        insertVizpar(workbook);
+      //        insertTuztadat(workbook);
+      //        insertVegyes(workbook);
+      //          insertLogika(workbook);
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (IOException fe) {
@@ -37,7 +38,18 @@ public class Input {
         }
         System.out.println("finish");
     }
+    public void databaseTorol(){
+            String sql = "DELETE FROM thom";
+            try (Connection conn = this.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                 pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
 
+
+
+        }
+    }
 
     public void insertThom(XSSFWorkbook workbook) {
         XSSFSheet sheet = workbook.getSheetAt(1);
@@ -737,7 +749,7 @@ public class Input {
         XSSFSheet sheet = workbook.getSheetAt(9);
         int firstRow = 8;
         XSSFRow row = sheet.getRow(firstRow);
-        while (row.getCell(0).getNumericCellValue() != 0) {
+        while (row.getCell(0).equals(null)) {
             int fcsz,szsz,ffv1,ffv2,fmf1,fmf2,mf21,mf22,mf31,mf32,mf41,mf42;
             String felnev;
             String sql = "INSERT INTO logika(fcsz,szsz,ffv1,ffv2,fmf1,fmf2,mf21,mf22,mf31,mf32,mf41,mf42,felnev) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
