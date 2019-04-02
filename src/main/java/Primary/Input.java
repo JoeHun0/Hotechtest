@@ -15,37 +15,15 @@ import java.sql.SQLException;
 
 public class Input {
 
-    public void InputFromExcell(File be) {
-        try {
-            XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(be));
-            databaseTorol();
-           //  insertThom(workbook);
-        //     insertRhom(workbook);
-        //     insertTuasz1(workbook);
-        //      insertTuag1(workbook);
-       //      insertTuasz2(workbook);
-       //       insertTuag2(workbook);
-       //       insertHatfok(workbook);
-       //       insertGozpar(workbook);
-      //        insertVizpar(workbook);
-      //        insertTuztadat(workbook);
-      //        insertVegyes(workbook);
-      //          insertLogika(workbook);
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (IOException fe) {
-            System.out.println(fe.getMessage());
-        }
-        System.out.println("finish");
-    }
-    public void databaseTorol(){
-            String sql = "DELETE FROM thom";
-            try (Connection conn = this.connect();
-                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                 pstmt.executeUpdate();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
 
+
+    public void databaseTorol() {
+        String sql = "DELETE FROM thom";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
 
 
         }
@@ -750,7 +728,7 @@ public class Input {
         int firstRow = 8;
         XSSFRow row = sheet.getRow(firstRow);
         while (row.getCell(0).equals(null)) {
-            int fcsz,szsz,ffv1,ffv2,fmf1,fmf2,mf21,mf22,mf31,mf32,mf41,mf42;
+            int fcsz, szsz, ffv1, ffv2, fmf1, fmf2, mf21, mf22, mf31, mf32, mf41, mf42;
             String felnev;
             String sql = "INSERT INTO logika(fcsz,szsz,ffv1,ffv2,fmf1,fmf2,mf21,mf22,mf31,mf32,mf41,mf42,felnev) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             try (Connection conn = this.connect();
