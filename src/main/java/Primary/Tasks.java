@@ -1,18 +1,24 @@
 package Primary;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.*;
+import java.io.*;
+import java.util.Date;
 
 public class Tasks {
     public void InputFromExcell(File be) {
+        Input input = new Input();
         try {
             XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(be));
-            Input input = new Input();
             input.databaseTorol();
             input.insertThom(workbook);
             input.insertRhom(workbook);
@@ -32,6 +38,15 @@ public class Tasks {
             System.out.println(fe.getMessage());
         }
         System.out.println("finish");
-    }
 
+    }
+    public void Tuzelo(){
+        Szamitas futoanyag = new Szamitas();
+       // futoanyag.szilardOsszetevok();
+        futoanyag.szilardVagyVegyes();
+        System.out.println("finish");
+    }
+    public void kimenet(){
+
+    }
 }

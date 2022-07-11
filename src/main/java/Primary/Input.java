@@ -16,17 +16,22 @@ import java.sql.SQLException;
 public class Input {
 
 
-
-    public void databaseTorol() {
-        String sql = "DELETE FROM thom";
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+    public void databaseTorol(){
 
 
+        String[] tablak = { "gozpar", "hatfok", "logika", "rhom", "sqlite_sequence", "thom", "tua", "tuag1", "tuag2", "tuasz1","tuasz2", "tuztadat" , "vegyes" , "vizpar"};
+            String sql = "DELETE FROM ";
+        for (String tabla  : tablak)
+        {
+            System.out.println(tabla);
+            try (Connection conn = this.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql + tabla)) {
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
         }
+
     }
 
     public void insertThom(XSSFWorkbook workbook) {
@@ -728,7 +733,7 @@ public class Input {
         int firstRow = 8;
         XSSFRow row = sheet.getRow(firstRow);
         while (row.getCell(0).equals(null)) {
-            int fcsz, szsz, ffv1, ffv2, fmf1, fmf2, mf21, mf22, mf31, mf32, mf41, mf42;
+            int fcsz,szsz,ffv1,ffv2,fmf1,fmf2,mf21,mf22,mf31,mf32,mf41,mf42;
             String felnev;
             String sql = "INSERT INTO logika(fcsz,szsz,ffv1,ffv2,fmf1,fmf2,mf21,mf22,mf31,mf32,mf41,mf42,felnev) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             try (Connection conn = this.connect();
